@@ -90,6 +90,14 @@ require("lazy").setup({
     },
     {
         "ThePrimeagen/vim-be-good",
+    },
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
+        },
+        opts = {},
     }
 
 })
