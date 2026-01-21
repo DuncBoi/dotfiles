@@ -14,6 +14,10 @@ a nested folder named after the app so `stow <package>` links to
 
 A MacOS window manager for efficiently navigating mac spaces without their long ahhh transitions
 
+### zsh
+
+Zsh shell config, linked into `~` (not `~/.config`)
+
 ### ghostty
 
 A cooler terminal
@@ -44,3 +48,8 @@ Apply:
 stow nvim ghostty aerospace tmux starship
 ```
 
+Zsh (`~/.zshrc`):
+
+```
+stow -t ~ zsh
+```
