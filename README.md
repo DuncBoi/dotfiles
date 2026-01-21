@@ -1,6 +1,6 @@
 # dotfiles
 
-My personal config files, managed with GNU Stow
+Personal config files, linked to ~/.config with Stow
 
 ## Structure
 
