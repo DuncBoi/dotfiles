@@ -92,6 +92,15 @@ require("lazy").setup({
         "ThePrimeagen/vim-be-good",
     },
     {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+    },
+    {
+        "windwp/nvim-ts-autotag",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        event = "InsertEnter",
+    },
+    {
         "MeanderingProgrammer/render-markdown.nvim",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",

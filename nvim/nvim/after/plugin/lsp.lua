@@ -10,6 +10,8 @@ require('mason-lspconfig').setup({
         'clangd',
         'pyright',
         'ts_ls',
+        'html',
+        'cssls',
     },
     handlers = {
         function(server)
@@ -60,4 +62,3 @@ end)
 vim.diagnostic.config({
     virtual_text = true
 })
-
