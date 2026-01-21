@@ -33,6 +33,7 @@ This makes the shell prompt actually look good
 ### tmux
 
 Tmux config
+After installing plugins with prefix-I, change line 105 in the sessionx shell script to remove the -n "..." at the end so that zoxide will not rename new windows for you 
 
 ## Stow
 
