@@ -16,7 +16,7 @@ A MacOS window manager for efficiently navigating mac spaces without their long 
 
 ### zsh
 
-Zsh shell config, linked into `~` (not `~/.config`)
+Zsh shell config, link into `~` (not `~/.config`) with the commands below
 
 ### ghostty
 
