@@ -37,6 +37,8 @@ local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
 cmp.setup({
     mapping = {
+        ['<C-j>'] = cmp.mapping.select_next_item(),
+        ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<CR>'] = cmp.mapping.confirm({select = true}),
         ['<C-Space>'] = cmp.mapping.complete(),
     },

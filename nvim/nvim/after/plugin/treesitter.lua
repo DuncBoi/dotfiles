@@ -9,6 +9,7 @@ require'nvim-treesitter'.setup{
     "query",
     "javascript",
     "typescript",
+    "tsx",
     "python",
     "jsx",
     "html",

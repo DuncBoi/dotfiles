@@ -15,3 +15,6 @@ fi
 
 # Convenience
 alias ll='ls -alF'
+
+# Quick AI ask
+alias '??'='noglob opencode run'
