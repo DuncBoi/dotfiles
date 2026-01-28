@@ -1,2 +1,5 @@
 theme = Catppuccin Mocha 
 font-size = 18
+keybind = cmd+plus=increase_font_size
+keybind = cmd+minus=decrease_font_size
+keybind = cmd+0=reset_font_size
