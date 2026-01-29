@@ -28,11 +28,5 @@ vim.keymap.set("n", "<leader>l", "<C-w>l", { silent = true, desc = "Focus right 
 vim.keymap.set("n", "<leader>j", "<C-w>j", { silent = true, desc = "Focus down split" })
 vim.keymap.set("n", "<leader>k", "<C-w>k", { silent = true, desc = "Focus up split" })
 
---codex
-vim.keymap.set("n", "<leader>cc", function()
-  require("codex").toggle()
-end, { desc = "Toggle Codex" })
-
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-

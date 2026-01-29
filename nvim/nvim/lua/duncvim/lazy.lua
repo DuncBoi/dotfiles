@@ -76,13 +76,6 @@ require("lazy").setup({
         },
     },
     {
-        "kkrampis/codex.nvim",
-        cmd = { "Codex", "CodexToggle" },
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-    },
-    {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = "InsertEnter",

@@ -196,4 +196,4 @@ run = ['move-node-to-workspace 3', 'layout tiles horizontal', 'move left']
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = ['move-node-to-workspace 3', 'layout tiles horizontal', 'move right']
+run = ['move-node-to-workspace3', 'layout tiles horizontal', 'move right']
