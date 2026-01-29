@@ -1,3 +1,7 @@
+if [[ "$OSTYPE" == "linux-gnu"* && "$TERM" == "xterm-ghostty" ]]; then
+  export TERM=xterm-256color
+fi
+
 # Vim-like mode and faster ESC handling for interactive shells.
 if [[ $- == *i* ]]; then
   export KEYTIMEOUT=1
