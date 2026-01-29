@@ -103,3 +103,9 @@ Zsh (`~/.zshrc`):
 ```
 stow -t ~ zsh
 ```
+
+## Install lazy plugin manager for Nvim
+```
+mkdir -p ~/.local/share/nvim/lazy
+git clone https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim
+```
