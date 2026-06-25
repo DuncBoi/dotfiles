@@ -1,3 +1,10 @@
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Kandji MDM
+. "$HOME/.local/bin/env"
+export PATH="$HOME/.local/bin:$PATH"
+
 if [[ "$OSTYPE" == "linux-gnu"* && "$TERM" == "xterm-ghostty" ]]; then
   export TERM=xterm-256color
 fi
@@ -22,3 +29,16 @@ alias ll='ls -alF'
 
 # Quick AI ask
 alias '??'='noglob opencode run'
+
+# Rename tmux window to 'claude' while running
+claude() {
+    if [ -n "$TMUX" ]; then
+        tmux rename-window 'claude'
+        command claude "$@"
+        tmux setw automatic-rename on
+    else
+        command claude "$@"
+    fi
+}
+# Direnv - added by Kandji
+eval "$(direnv hook zsh)"

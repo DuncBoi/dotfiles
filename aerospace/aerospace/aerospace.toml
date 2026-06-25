@@ -42,7 +42,7 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "D", "B", "T", "C", "N"]
+persistent-workspaces = ["1", "2", "3", "D", "B", "T", "C", "N", "S"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -132,6 +132,7 @@ on-mode-changed = []
     alt-t = 'workspace T'
     alt-c = 'workspace C'
     alt-n = 'workspace N'
+    alt-s = 'workspace S'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-m = 'move-node-to-workspace 1'
@@ -142,6 +143,7 @@ on-mode-changed = []
     alt-shift-t = 'move-node-to-workspace T'
     alt-shift-c = 'move-node-to-workspace C'
     alt-shift-n = 'move-node-to-workspace N'
+    alt-shift-s = 'move-node-to-workspace S'
 
     # Seeii: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
@@ -170,6 +172,10 @@ on-mode-changed = []
     alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace S', 'workspace S']
+
+[[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = "move-node-to-workspace D"
 
@@ -180,7 +186,7 @@ run = "move-node-to-workspace T"
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
-run = "move-node-to-workspace B"
+run = ['move-node-to-workspace B', 'workspace B']
 
 [[on-window-detected]]
 if.app-id = 'notion.id'
@@ -196,4 +202,4 @@ run = ['move-node-to-workspace 3', 'layout tiles horizontal', 'move left']
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = ['move-node-to-workspace3', 'layout tiles horizontal', 'move right']
+run = ['move-node-to-workspace 3', 'layout tiles horizontal', 'move right']
