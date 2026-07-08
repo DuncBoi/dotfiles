@@ -31,6 +31,11 @@ require('mason-lspconfig').setup({
     }
 })
 
+-- Swift: sourcekit-lsp ships with Xcode, so it's not Mason-managed like the
+-- servers above. Uses the newer native vim.lsp API (nvim-lspconfig's
+-- require('lspconfig')[x].setup{} is deprecated as of Neovim 0.11).
+vim.lsp.enable('sourcekit')
+
 -- completion setup (nvim-cmp)
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

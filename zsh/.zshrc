@@ -42,3 +42,6 @@ claude() {
 }
 # Direnv - added by Kandji
 eval "$(direnv hook zsh)"
+
+[ -f ~/.secrets ] && source ~/.secrets
+

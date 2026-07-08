@@ -1,0 +1,4 @@
+theme = "catppuccin-mocha"
+mode = "auto"
+line_numbers = true
+transparent_background = true

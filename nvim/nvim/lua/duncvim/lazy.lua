@@ -34,6 +34,7 @@ require("lazy").setup({
     -- Harpoon (for switching tabs)
     {
         "ThePrimeagen/harpoon",
+        branch = "harpoon2",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
 
