@@ -1,6 +1,9 @@
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# Completion (tab-complete branches, flags, etc. for git and other CLIs)
+autoload -Uz compinit && compinit
+
 # Kandji MDM
 . "$HOME/.local/bin/env"
 export PATH="$HOME/.local/bin:$PATH"

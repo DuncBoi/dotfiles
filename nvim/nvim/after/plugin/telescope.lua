@@ -9,5 +9,7 @@ vim.keymap.set("n", "<leader>ff", function()
 end)
 vim.keymap.set("n", "<C-p>",       builtin.git_files)
 vim.keymap.set("n", "<leader>fs", function()
-    builtin.grep_string({ search = vim.fn.input("Grep > ") })
+    builtin.live_grep({
+        entry_maker = path_display.entry_maker,
+    })
 end)
