@@ -58,7 +58,10 @@ cmp.setup({
 lsp_zero.on_attach(function(_, bufnr)
     local opts = {buffer = bufnr}
 
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    -- Jumps straight there for a single definition; opens the same
+    -- fuzzy-list-with-preview UI as <leader>gc/<leader>ff when there are
+    -- multiple, instead of the default quickfix-list-based vim.lsp.buf.definition().
+    vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     -- Find all callers/usages of the symbol under the cursor, via Telescope
