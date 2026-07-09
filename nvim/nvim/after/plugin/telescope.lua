@@ -8,8 +8,4 @@ vim.keymap.set("n", "<leader>ff", function()
     })
 end)
 vim.keymap.set("n", "<C-p>",       builtin.git_files)
-vim.keymap.set("n", "<leader>fs", function()
-    builtin.live_grep({
-        entry_maker = path_display.entry_maker,
-    })
-end)
+vim.keymap.set("n", "<leader>fs", builtin.live_grep)
