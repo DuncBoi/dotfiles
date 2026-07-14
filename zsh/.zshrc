@@ -30,19 +30,6 @@ fi
 # Convenience
 alias ll='ls -alF'
 
-# Quick AI ask
-alias '??'='noglob opencode run'
-
-# Rename tmux window to 'claude' while running
-claude() {
-    if [ -n "$TMUX" ]; then
-        tmux rename-window 'claude'
-        command claude "$@"
-        tmux setw automatic-rename on
-    else
-        command claude "$@"
-    fi
-}
 # Direnv - added by Kandji
 eval "$(direnv hook zsh)"
 

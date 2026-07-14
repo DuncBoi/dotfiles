@@ -4,15 +4,57 @@ Personal config files, linked to ~/.config with Stow
 
 ## Structure
 
-This repo uses a Stow layout that targets `~/.config`. Each package contains
+This repo uses Stow that targets `~/.config`. Each package contains
 a nested folder named after the app so `stow <package>` links to
 `~/.config/<app>/...`.
+
+## Dependencies
+
+Install these before stowing 
+
+Core
+- [Homebrew](https://brew.sh)
+- [GNU Stow](https://www.gnu.org/software/stow/) — `brew install stow`
+- Xcode Command Line Tools — `xcode-select --install` 
+
+Apps (each is its own Stow package):
+- [Ghostty](https://ghostty.org) — `brew install --cask ghostty`
+- [AeroSpace](https://github.com/nikitabobko/AeroSpace) — `brew install --cask nikitabobko/tap/aerospace`
+- [tmux](https://github.com/tmux/tmux) — `brew install tmux`
+- [Neovim](https://neovim.io) — `brew install neovim`
+- [Starship](https://starship.rs) — `brew install starship`
+- [Hunk](https://hunk.dev) — `brew install hunk`
+
+zsh config depends on:
+- [zoxide](https://github.com/ajeetdsouza/zoxide) — `brew install zoxide`
+- [direnv](https://direnv.net) — `brew install direnv`
+- a `~/.secrets` file (untracked) for anything sourced at the end of `.zshrc`, e.g. `ANTHROPIC_API_KEY` for Avante below
+
+tmux config depends on:
+- [TPM](https://github.com/tmux-plugins/tpm), cloned manually (not managed by Stow/Homebrew):
+  ```
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  ```
+  Then open tmux and press `prefix + I` to fetch the plugins declared in
+  `tmux.conf` (sessionx, catppuccin, cpu, battery).
+- [fzf](https://github.com/junegunn/fzf) — `brew install fzf` (used by the sessionx plugin's fuzzy finder)
+- zoxide (see above)
+
+Neovim config depends on:
+- [ripgrep](https://github.com/BurntSushi/ripgrep) — `brew install ripgrep` (required by Telescope's live grep / grep string)
+- [fd](https://github.com/sharkdp/fd) — `brew install fd` (speeds up Telescope's find_files)
+- Node.js/npm — `brew install node` (for LSP servers: `pyright`, `ts_ls`, `html`, `cssls`)
+- `ANTHROPIC_API_KEY` env var required by Avante 
+- Swift projects only: Xcode (ships `sourcekit-lsp`) and [xcode-build-server](https://github.com/SolaWing/xcode-build-server) — `brew install xcode-build-server`, then run `xcode-build-server config -workspace <App>.xcworkspace -scheme <Scheme>` in the project root so `gd`/jump-to-definition works
+
+Everything else (Lua plugins via lazy.nvim, `lua_ls`/`clangd` LSP servers via Mason,
+Treesitter parsers) installs itself on first launch — see the setup steps below.
 
 ## Packages
 
 ### aerospace
 
-A MacOS window manager for efficiently navigating mac spaces without their long ahhh transitions
+MacOS window manager
 
 Commands / keybinds:
 - `alt-/` toggle layout (tiles horizontal/vertical)
@@ -54,16 +96,16 @@ Commands / keybinds (leader is space):
 - `<C-q>` close current window (normal/insert/terminal/visual)
 - `<leader>e` toggle Neo-tree file explorer
 - `<leader>h/j/k/l` move focus left/down/up/right split
-- `<leader>cc` toggle Codex
 - `<leader>y` / `<leader>Y` yank to system clipboard
 - `<leader>u` toggle Undotree
 - `<leader>gs` open Fugitive Git status
 - `<leader>ff` Telescope find files; `<C-p>` Telescope git files
-- `<leader>fs` Telescope live grep (prompted)
+- `<leader>fs` Telescope live grep; `/` fuzzy-find in current buffer
 - Harpoon: `<leader>a` add file; `<C-e>` quick menu; `<C-h/j/k/l>` go to file 1/2/3/4
-- LSP: `gd` definition; `K` hover; `gi` implementation; `<leader>rn` rename; `<leader>ca` code action
+- LSP: `gd` definition (Telescope picker if multiple); `K` hover; `gi` implementation; `<leader>gc` references; `<leader>rn` rename; `<leader>ca` code action
 - Completion: `<CR>` confirm; `<C-Space>` trigger
 - Neo-tree window: `C` set root; `U` go to parent directory
+- Avante (AI assistant, Claude-backed): see `:help avante` for its default keymaps
 
 ### starship
 
@@ -84,18 +126,25 @@ Commands / keybinds (prefix is `C-a`):
 - Copy mode: `v` start selection; `y` copy to macOS clipboard
 - Sessionx: `C-a o` open; `C-a ctrl-y` new window with zoxide; `C-a ctrl-d` kill session; `C-a alt-j/k` scroll down/up
 
+### hunk
+
+terminal diff viewer
+
+Commands:
+- No custom commands
+
 ## Stow
 
 Dry run:
 
 ```
-stow -n -v nvim ghostty aerospace tmux starship
+stow -n -v nvim ghostty aerospace tmux starship hunk
 ```
 
 Apply:
 
 ```
-stow nvim ghostty aerospace tmux starship
+stow nvim ghostty aerospace tmux starship hunk
 ```
 
 Zsh (`~/.zshrc`):
@@ -109,3 +158,6 @@ stow -t ~ zsh
 mkdir -p ~/.local/share/nvim/lazy
 git clone https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim
 ```
+
+Then launch `nvim` — lazy.nvim installs the plugins, Mason installs the LSP
+servers, and Treesitter installs its parsers automatically on first run.
