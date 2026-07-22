@@ -43,7 +43,15 @@ require("lazy").setup({
     },
 
     {
-        "tpope/vim-fugitive",
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+    },
+
+    {
+        "lewis6991/gitsigns.nvim",
     },
 
     {

@@ -29,6 +29,7 @@ fi
 
 # Convenience
 alias ll='ls -alF'
+alias git-prune-merged='~/dotfiles/scripts/git-prune-merged.sh'
 
 # Direnv - added by Kandji
 eval "$(direnv hook zsh)"

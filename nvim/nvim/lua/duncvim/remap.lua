@@ -30,3 +30,10 @@ vim.keymap.set("n", "<leader>k", "<C-w>k", { silent = true, desc = "Focus up spl
 
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+-- Delete always goes to the black hole register instead of the unnamed one,
+-- so it never clobbers whatever you last yanked with `y` (still pasteable via `p`).
+vim.keymap.set({ "n", "v" }, "d", [["_d]])
+vim.keymap.set({ "n", "v" }, "D", [["_D]])
+vim.keymap.set({ "n", "v" }, "x", [["_x]])
+vim.keymap.set({ "n", "v" }, "X", [["_X]])

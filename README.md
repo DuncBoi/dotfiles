@@ -78,6 +78,7 @@ Zsh shell config, link into `~` (not `~/.config`) with the commands below
 Commands:
 - `ll` = `ls -alF`
 - `z` (from zoxide) jumps to frequently used dirs, if zoxide is installed
+- `git-prune-merged` runs `scripts/git-prune-merged.sh` (see below)
 
 ### ghostty
 
@@ -98,7 +99,8 @@ Commands / keybinds (leader is space):
 - `<leader>h/j/k/l` move focus left/down/up/right split
 - `<leader>y` / `<leader>Y` yank to system clipboard
 - `<leader>u` toggle Undotree
-- `<leader>gs` open Fugitive Git status
+- `<leader>gs` open Neogit status
+- Gitsigns: `]c` / `[c` next/previous hunk; `<leader>hp` preview hunk; `<leader>hd` diff file vs HEAD; `<leader>hs` stage hunk; `<leader>hr` reset hunk
 - `<leader>ff` Telescope find files; `<C-p>` Telescope git files
 - `<leader>fs` Telescope live grep; `/` fuzzy-find in current buffer
 - Harpoon: `<leader>a` add file; `<C-e>` quick menu; `<C-h/j/k/l>` go to file 1/2/3/4
@@ -132,6 +134,17 @@ terminal diff viewer
 
 Commands:
 - No custom commands
+
+## Scripts
+
+`scripts/` isn't a Stow package — it's just plain files in the repo, referenced
+by absolute path (e.g. the `git-prune-merged` alias below), so it's unaffected
+by which packages you've stowed.
+
+- `git-prune-merged.sh` — finds local branches with a merged PR (checked via
+  `gh`, so it catches squash-merges too), removes any associated git worktree,
+  then deletes the branch. Prompts for confirmation before deleting anything.
+  Requires the [GitHub CLI](https://cli.github.com) (`gh`), authenticated.
 
 ## Stow
 
