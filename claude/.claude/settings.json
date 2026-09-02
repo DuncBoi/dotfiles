@@ -1,0 +1,37 @@
+{
+  "$comment": "Portable template, NOT stow-linked (see .stowrc) — merge these hooks into your own ~/.claude/settings.json by hand on each machine. Deliberately excludes anything machine/company-specific (e.g. corporate telemetry hooks) that lives only in the real settings.json on a given machine.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/tuicr-sync.sh\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/nvim-edit-sync.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/claude-notes-check.sh\"",
+            "timeout": 7260,
+            "async": true,
+            "asyncRewake": true,
+            "rewakeMessage": "claude-notes watcher fired:",
+            "rewakeSummary": "New note"
+          }
+        ]
+      }
+    ]
+  }
+}

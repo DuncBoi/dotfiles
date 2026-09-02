@@ -1,10 +1,10 @@
 # dotfiles
 
-Personal config files, linked to ~/.config with Stow
+Personal config files, linked to ~/.config with GNU Stow
 
 ## Structure
 
-This repo uses Stow that targets `~/.config`. Each package contains
+This repo uses GNU Stow that targets `~/.config`. Each package contains
 a nested folder named after the app so `stow <package>` links to
 `~/.config/<app>/...`.
 
@@ -114,6 +114,8 @@ Commands / keybinds (leader is space):
 - Completion: `<CR>` confirm; `<C-Space>` trigger
 - Neo-tree window: `C` set root; `U` go to parent directory
 - Avante (AI assistant, Claude-backed): see `:help avante` for its default keymaps
+- `<leader>c` leave a note for Claude at the current line (appended to a plain
+  log under `~/.claude/claude-notes/`, picked up by a Claude Code Stop hook)
 
 ### starship
 
@@ -140,6 +142,9 @@ terminal code review TUI (vim keybindings, exports to GitHub/GitLab/Bitbucket/cl
 
 Commands:
 - No custom commands
+- Doesn't poll the filesystem — if a file changes outside tuicr (another editor, an
+  agent), press `:e` (alias `:reload`) to pick it up. Editing via tuicr's own `e` key
+  reloads automatically on save.
 
 ### claude
 
@@ -149,6 +154,15 @@ Contents:
 - `CLAUDE.md` — global instructions for all projects
 - `skills/tuicr` — lets Claude open a [tuicr](https://tuicr.dev) review pane (tmux/Zellij/cmux/Herdr)
   after making changes and read back inline comments via `tuicr review comments`
+- `hooks/` — scripts wired up as Claude Code hooks (see `settings.json` below):
+  - `tuicr-sync.sh` / `nvim-edit-sync.sh` (`PostToolUse`) — after Claude edits a file, jump an
+    open tuicr pane or nvim buffer (in the same tmux session) straight to that file
+  - `claude-notes-check.sh` (`Stop`, `asyncRewake`) — watches a plain per-repo notes log
+    (appended to by nvim's `<leader>c`) and wakes Claude the moment a new note appears
+- `settings.json` — **not** stow-linked (see `.stowrc`) since the real `~/.claude/settings.json`
+  on a given machine may carry machine/company-specific config (e.g. corporate telemetry hooks)
+  that shouldn't live in this repo. This is a portable template of just the hooks above — merge
+  it into your own `~/.claude/settings.json` by hand on each machine.
 
 ## Scripts
 

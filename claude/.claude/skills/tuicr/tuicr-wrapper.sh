@@ -4,8 +4,8 @@ set -e -u -o pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/_tuicr-common.sh"
 
 # Configuration - override via environment variables
-TUICR_PANE_POSITION="${TUICR_PANE_POSITION:-top}"    # top or bottom
-TUICR_PANE_SIZE="${TUICR_PANE_SIZE:-80}"              # percentage of screen
+TUICR_PANE_POSITION="${TUICR_PANE_POSITION:-left}"    # top, bottom, left, or right
+TUICR_PANE_SIZE="${TUICR_PANE_SIZE:-55}"              # percentage of screen
 
 # Colors for output
 RED='\033[0;31m'
@@ -36,8 +36,8 @@ Arguments:
   tuicr-args   Extra arguments passed through to tuicr (e.g. -w, -r <revset>)
 
 Environment variables:
-  TUICR_PANE_POSITION   Position of tuicr pane: top or bottom (default: top)
-  TUICR_PANE_SIZE       Size of pane as percentage (default: 80)
+  TUICR_PANE_POSITION   Position of tuicr pane: top, bottom, left, or right (default: left)
+  TUICR_PANE_SIZE       Size of pane as percentage (default: 55)
 
 Examples:
   $(basename "$0")                    # Review changes in current directory
@@ -88,27 +88,42 @@ launch_tuicr_pane() {
   shift
   local tuicr_args=("$@")
 
-  # Get window height and calculate lines (using -l instead of -p to avoid "size missing" error)
-  local window_height
-  window_height=$(tmux display-message -p '#{window_height}')
-  local pane_lines=$(( window_height * TUICR_PANE_SIZE / 100 ))
-
   # Build the split-window command
   local split_args=()
+  local pane_size
+  local size_unit
 
-  # Determine split direction based on position
-  if [[ "$TUICR_PANE_POSITION" == "top" ]]; then
-    split_args+=(-b)  # Create pane above
-  fi
-  # For bottom, no -b flag needed (default)
+  # Determine split axis/direction and size (in lines for top/bottom,
+  # columns for left/right) based on position. -l takes a fixed count
+  # instead of a percentage to work without a TTY.
+  case "$TUICR_PANE_POSITION" in
+    left|right)
+      local window_width
+      window_width=$(tmux display-message -p '#{window_width}')
+      pane_size=$(( window_width * TUICR_PANE_SIZE / 100 ))
+      size_unit="columns"
+      split_args+=(-h)
+      [[ "$TUICR_PANE_POSITION" == "left" ]] && split_args+=(-b)
+      ;;
+    top|bottom)
+      local window_height
+      window_height=$(tmux display-message -p '#{window_height}')
+      pane_size=$(( window_height * TUICR_PANE_SIZE / 100 ))
+      size_unit="lines"
+      [[ "$TUICR_PANE_POSITION" == "top" ]] && split_args+=(-b)
+      ;;
+    *)
+      log_error "Invalid TUICR_PANE_POSITION: $TUICR_PANE_POSITION (expected top, bottom, left, or right)"
+      exit 1
+      ;;
+  esac
 
-  # Set pane size in lines (not percentage, to work without TTY)
-  split_args+=(-l "$pane_lines")
+  split_args+=(-l "$pane_size")
 
   # Change to target directory
   split_args+=(-c "$target_dir")
 
-  log_info "Launching tuicr in $TUICR_PANE_POSITION pane (${pane_lines} lines, ${TUICR_PANE_SIZE}%)"
+  log_info "Launching tuicr in $TUICR_PANE_POSITION pane (${pane_size} ${size_unit}, ${TUICR_PANE_SIZE}%)"
   log_info "Directory: $target_dir"
 
   # Create unique channel for wait-for

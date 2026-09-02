@@ -44,6 +44,9 @@ fi
 alias ll='ls -alF'
 alias git-prune-merged='~/dotfiles/scripts/git-prune-merged.sh'
 
+export EDITOR=nvim
+export VISUAL=nvim
+
 # Direnv - added by Kandji
 eval "$(direnv hook zsh)"
 

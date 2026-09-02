@@ -1,4 +1,6 @@
 require("gitsigns").setup({
+    numhl = true,
+    word_diff = true,
     on_attach = function(bufnr)
         local gitsigns = require("gitsigns")
         local opts = { buffer = bufnr }
