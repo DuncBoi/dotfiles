@@ -69,7 +69,6 @@ lsp_zero.on_attach(function(_, bufnr)
     -- the default quickfix-list-based vim.lsp.buf.references().
     vim.keymap.set("n", "<leader>gc", require("telescope.builtin").lsp_references, opts)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 end)
 
 -- optional nicer diagnostics
