@@ -110,7 +110,7 @@ Commands / keybinds (leader is space):
 - `<leader>ff` Telescope find files; `<C-p>` Telescope git files
 - `<leader>fs` Telescope live grep; `/` fuzzy-find in current buffer
 - Harpoon: `<leader>a` add file; `<C-e>` quick menu; `<C-h/j/k/l>` go to file 1/2/3/4
-- LSP: `gd` definition (Telescope picker if multiple); `K` hover; `gi` implementation; `<leader>gc` references; `<leader>rn` rename; `<leader>ca` code action
+- LSP: `gd` definition (Telescope picker if multiple); `K` hover; `gi` implementation; `<leader>gc` references; `<leader>rn` rename
 - Completion: `<CR>` confirm; `<C-Space>` trigger
 - Neo-tree window: `C` set root; `U` go to parent directory
 - Avante (AI assistant, Claude-backed): see `:help avante` for its default keymaps
