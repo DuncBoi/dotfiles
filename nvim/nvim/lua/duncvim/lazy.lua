@@ -103,26 +103,7 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
         },
-        opts = {
-            file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-    },
-
-    -- Avante (AI coding assistant)
-    {
-        "yetone/avante.nvim",
-        event = "VeryLazy",
-        version = false,
-        build = "make",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-lua/plenary.nvim",
-            "MunifTanjim/nui.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "nvim-telescope/telescope.nvim",
-            "MeanderingProgrammer/render-markdown.nvim",
-        },
+        ft = { "markdown" },
     },
 
 })

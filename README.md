@@ -29,7 +29,7 @@ zsh config depends on:
 - [zoxide](https://github.com/ajeetdsouza/zoxide) — `brew install zoxide`
 - [direnv](https://direnv.net) — `brew install direnv`
 - [Graphite CLI](https://graphite.dev) (optional, for stacked PRs) — `brew install withgraphite/tap/graphite`
-- a `~/.secrets` file (untracked) for anything sourced at the end of `.zshrc`, e.g. `ANTHROPIC_API_KEY` for Avante below
+- a `~/.secrets` file (untracked) for anything sourced at the end of `.zshrc`
 
 tmux config depends on:
 - [TPM](https://github.com/tmux-plugins/tpm), cloned manually (not managed by Stow/Homebrew):
@@ -45,7 +45,6 @@ Neovim config depends on:
 - [ripgrep](https://github.com/BurntSushi/ripgrep) — `brew install ripgrep` (required by Telescope's live grep / grep string)
 - [fd](https://github.com/sharkdp/fd) — `brew install fd` (speeds up Telescope's find_files)
 - Node.js/npm — `brew install node` (for LSP servers: `pyright`, `ts_ls`, `html`, `cssls`)
-- `ANTHROPIC_API_KEY` env var required by Avante 
 - Swift projects only: Xcode (ships `sourcekit-lsp`) and [xcode-build-server](https://github.com/SolaWing/xcode-build-server) — `brew install xcode-build-server`, then run `xcode-build-server config -workspace <App>.xcworkspace -scheme <Scheme>` in the project root so `gd`/jump-to-definition works
 
 Everything else (Lua plugins via lazy.nvim, `lua_ls`/`clangd` LSP servers via Mason,
@@ -113,7 +112,6 @@ Commands / keybinds (leader is space):
 - LSP: `gd` definition (Telescope picker if multiple); `K` hover; `gi` implementation; `<leader>gc` references; `<leader>rn` rename
 - Completion: `<CR>` confirm; `<C-Space>` trigger
 - Neo-tree window: `C` set root; `U` go to parent directory
-- Avante (AI assistant, Claude-backed): see `:help avante` for its default keymaps
 - `<leader>c` leave a note for Claude at the current line (appended to a plain
   log under `~/.claude/claude-notes/`, picked up by a Claude Code Stop hook)
 
