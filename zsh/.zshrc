@@ -16,6 +16,14 @@ fi
 if [[ $- == *i* ]]; then
   export KEYTIMEOUT=1
   bindkey -v
+
+  # zsh doesn't redraw the prompt when the vi keymap (insert/normal) changes,
+  # so starship's mode indicator lags behind reality and it's easy to type
+  # into the wrong mode without noticing. Force a redraw on every switch.
+  function zle-keymap-select {
+    zle reset-prompt
+  }
+  zle -N zle-keymap-select
 fi
 
 # Starship
@@ -27,6 +35,11 @@ if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
 fi
 
+# Graphite (stacked PRs)
+if command -v gt >/dev/null 2>&1; then
+  eval "$(gt completion)"
+fi
+
 # Convenience
 alias ll='ls -alF'
 alias git-prune-merged='~/dotfiles/scripts/git-prune-merged.sh'
@@ -36,3 +49,4 @@ eval "$(direnv hook zsh)"
 
 [ -f ~/.secrets ] && source ~/.secrets
 
+eval "$(fnm env --use-on-cd)"

@@ -39,10 +39,6 @@ require("lazy").setup({
     },
 
     {
-        "mbbill/undotree",
-    },
-
-    {
         "NeogitOrg/neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -52,6 +48,11 @@ require("lazy").setup({
 
     {
         "lewis6991/gitsigns.nvim",
+    },
+
+    {
+        "sindrets/diffview.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
     },
 
     {
