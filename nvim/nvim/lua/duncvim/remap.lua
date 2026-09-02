@@ -31,6 +31,13 @@ vim.keymap.set("n", "<leader>k", "<C-w>k", { silent = true, desc = "Focus up spl
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
+-- Horizontal scroll (half a screen width at a time). Replaces the default
+-- H/L (jump cursor to top/bottom of screen) since Ctrl+Arrow gets eaten by
+-- macOS's Mission Control space-switching shortcut before it reaches the
+-- terminal at all.
+vim.keymap.set("n", "H", "zH", { desc = "Scroll view left" })
+vim.keymap.set("n", "L", "zL", { desc = "Scroll view right" })
+
 -- Delete always goes to the black hole register instead of the unnamed one,
 -- so it never clobbers whatever you last yanked with `y` (still pasteable via `p`).
 vim.keymap.set({ "n", "v" }, "d", [["_d]])

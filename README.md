@@ -23,11 +23,12 @@ Apps (each is its own Stow package):
 - [tmux](https://github.com/tmux/tmux) — `brew install tmux`
 - [Neovim](https://neovim.io) — `brew install neovim`
 - [Starship](https://starship.rs) — `brew install starship`
-- [Hunk](https://hunk.dev) — `brew install hunk`
+- [tuicr](https://tuicr.dev) — `brew install tuicr`
 
 zsh config depends on:
 - [zoxide](https://github.com/ajeetdsouza/zoxide) — `brew install zoxide`
 - [direnv](https://direnv.net) — `brew install direnv`
+- [Graphite CLI](https://graphite.dev) (optional, for stacked PRs) — `brew install withgraphite/tap/graphite`
 - a `~/.secrets` file (untracked) for anything sourced at the end of `.zshrc`, e.g. `ANTHROPIC_API_KEY` for Avante below
 
 tmux config depends on:
@@ -56,6 +57,10 @@ Treesitter parsers) installs itself on first launch — see the setup steps belo
 
 MacOS window manager
 
+macOS setup: System Settings -> Desktop & Dock -> Group windows by application. Without this,
+Mission Control/App Exposé shows every tiled window shrunk down individually instead of grouped,
+so windows end up all small.
+
 Commands / keybinds:
 - `alt-/` toggle layout (tiles horizontal/vertical)
 - `alt-h/j/k/l` focus left/down/up/right
@@ -79,6 +84,7 @@ Commands:
 - `ll` = `ls -alF`
 - `z` (from zoxide) jumps to frequently used dirs, if zoxide is installed
 - `git-prune-merged` runs `scripts/git-prune-merged.sh` (see below)
+- `gt` ([Graphite](https://graphite.dev) CLI) tab-completions load automatically, if `gt` is installed
 
 ### ghostty
 
@@ -98,9 +104,9 @@ Commands / keybinds (leader is space):
 - `<leader>e` toggle Neo-tree file explorer
 - `<leader>h/j/k/l` move focus left/down/up/right split
 - `<leader>y` / `<leader>Y` yank to system clipboard
-- `<leader>u` toggle Undotree
-- `<leader>gs` open Neogit status
-- Gitsigns: `]c` / `[c` next/previous hunk; `<leader>hp` preview hunk; `<leader>hd` diff file vs HEAD; `<leader>hs` stage hunk; `<leader>hr` reset hunk
+- `<leader>gg` open Neogit status
+- Gitsigns: `]c` / `[c` next/previous hunk; `<leader>hp` preview hunk; `<leader>hs` stage hunk; `<leader>hr` reset hunk
+- Diffview: `<leader>gh` file history for current file (visual mode: for selected lines); `<leader>hd` every changed file vs last commit, whole repo
 - `<leader>ff` Telescope find files; `<C-p>` Telescope git files
 - `<leader>fs` Telescope live grep; `/` fuzzy-find in current buffer
 - Harpoon: `<leader>a` add file; `<C-e>` quick menu; `<C-h/j/k/l>` go to file 1/2/3/4
@@ -128,12 +134,21 @@ Commands / keybinds (prefix is `C-a`):
 - Copy mode: `v` start selection; `y` copy to macOS clipboard
 - Sessionx: `C-a o` open; `C-a ctrl-y` new window with zoxide; `C-a ctrl-d` kill session; `C-a alt-j/k` scroll down/up
 
-### hunk
+### tuicr
 
-terminal diff viewer
+terminal code review TUI (vim keybindings, exports to GitHub/GitLab/Bitbucket/clipboard)
 
 Commands:
 - No custom commands
+
+### claude
+
+Claude Code global config (`~/.claude`), link into `~` (not `~/.config`) with the command below
+
+Contents:
+- `CLAUDE.md` — global instructions for all projects
+- `skills/tuicr` — lets Claude open a [tuicr](https://tuicr.dev) review pane (tmux/Zellij/cmux/Herdr)
+  after making changes and read back inline comments via `tuicr review comments`
 
 ## Scripts
 
@@ -151,19 +166,25 @@ by which packages you've stowed.
 Dry run:
 
 ```
-stow -n -v nvim ghostty aerospace tmux starship hunk
+stow -n -v nvim ghostty aerospace tmux starship tuicr
 ```
 
 Apply:
 
 ```
-stow nvim ghostty aerospace tmux starship hunk
+stow nvim ghostty aerospace tmux starship tuicr
 ```
 
 Zsh (`~/.zshrc`):
 
 ```
 stow -t ~ zsh
+```
+
+Claude Code (`~/.claude`):
+
+```
+stow -t ~ claude
 ```
 
 ## Install lazy plugin manager for Nvim
