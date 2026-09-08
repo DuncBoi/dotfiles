@@ -13,23 +13,22 @@ require('mason-lspconfig').setup({
         'html',
         'cssls',
     },
-    handlers = {
-        function(server)
-            local opts = {}
-
-            -- special config for lua
-            if server == 'lua_ls' then
-                opts.settings = {
-                    Lua = {
-                        diagnostics = { globals = {'vim'} }
-                    }
-                }
-            end
-
-            require('lspconfig')[server].setup(opts)
-        end,
-    }
+    -- mason-lspconfig's newer automatic_enable feature auto-enables every
+    -- installed server with its own bare defaults, silently bypassing the
+    -- old `handlers` option below it used to be configured with (that table
+    -- never actually ran). lua_ls is excluded here and configured explicitly
+    -- below instead, via the same vim.lsp.config/enable API sourcekit uses.
+    automatic_enable = { exclude = { 'lua_ls' } },
 })
+
+vim.lsp.config('lua_ls', {
+    settings = {
+        Lua = {
+            diagnostics = { globals = { 'vim' } },
+        },
+    },
+})
+vim.lsp.enable('lua_ls')
 
 -- Swift: sourcekit-lsp ships with Xcode, so it's not Mason-managed like the
 -- servers above. Uses the newer native vim.lsp API (nvim-lspconfig's

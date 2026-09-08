@@ -100,12 +100,14 @@ Commands / keybinds (leader is space):
 - `<leader>pv` open netrw
 - `<leader>t` terminal in bottom split; `<leader>T` terminal in right split
 - `<C-q>` close current window (normal/insert/terminal/visual)
-- `<leader>e` toggle Neo-tree file explorer
+- `<leader>e` toggle Neo-tree file explorer; once focused in the tree, `g`
+  jumps straight to the git-status view (changed files only). Neo-tree's
+  default `g`-prefixed git commands (stage/commit/push, etc.) are disabled
+  so plain `g` fires instantly
 - `<leader>h/j/k/l` move focus left/down/up/right split
 - `<leader>y` / `<leader>Y` yank to system clipboard
 - `<leader>gg` open Neogit status
 - Gitsigns: `]c` / `[c` next/previous hunk; `<leader>hp` preview hunk; `<leader>hs` stage hunk; `<leader>hr` reset hunk
-- Diffview: `<leader>gh` file history for current file (visual mode: for selected lines); `<leader>hd` every changed file vs last commit, whole repo
 - `<leader>ff` Telescope find files; `<C-p>` Telescope git files
 - `<leader>fs` Telescope live grep; `/` fuzzy-find in current buffer
 - Harpoon: `<leader>a` add file; `<C-e>` quick menu; `<C-h/j/k/l>` go to file 1/2/3/4

@@ -17,7 +17,30 @@ vim.keymap.set({ "n", "i", "t", "v" }, "<C-q>", function()
 end, { desc = "Close current window" })
 
 -- neo-tree
-vim.keymap.set("n", "<leader>e", ":Neotree toggle filesystem left<CR>", {
+-- Plain ":Neotree toggle filesystem" only checks the filesystem source's own
+-- window state, so if the tree is open on a different source (e.g. git
+-- status via "g"), it switches to filesystem instead of closing. This closes
+-- whatever's open at the left position regardless of source, or reopens on
+-- whichever source was last used (tracked in vim.g.neotree_last_source by
+-- the "g" mapping in neo-tree.lua), defaulting to filesystem.
+local function neotree_left_open()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.bo[buf].filetype == "neo-tree" then
+      return true
+    end
+  end
+  return false
+end
+
+vim.keymap.set("n", "<leader>e", function()
+  if neotree_left_open() then
+    require("neo-tree.command").execute({ action = "close", position = "left" })
+  else
+    local source = vim.g.neotree_last_source or "filesystem"
+    require("neo-tree.command").execute({ source = source, position = "left", action = "show" })
+  end
+end, {
   desc = "Toggle Neo-tree file explorer",
   silent = true,
 })

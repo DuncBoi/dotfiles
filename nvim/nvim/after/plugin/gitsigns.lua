@@ -7,8 +7,8 @@ require("gitsigns").setup({
 
         vim.keymap.set("n", "]c", gitsigns.next_hunk, opts)
         vim.keymap.set("n", "[c", gitsigns.prev_hunk, opts)
-        vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk, opts)
-        vim.keymap.set("n", "<leader>hs", gitsigns.stage_hunk, opts)
-        vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk, opts)
+        vim.keymap.set("n", "<leader>dp", gitsigns.preview_hunk, opts)
+        vim.keymap.set("n", "<leader>ds", gitsigns.stage_hunk, opts)
+        vim.keymap.set("n", "<leader>dr", gitsigns.reset_hunk, opts)
     end,
 })

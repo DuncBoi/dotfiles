@@ -29,6 +29,15 @@ case "$last_lines" in
   *INSERT*|*VISUAL*|*REPLACE*|*"--"*|*"[+]"*) exit 0 ;;
 esac
 
+# Skip if any floating window (Telescope, a comment/note box, etc.) is
+# currently open — blindly sending keys would type into it instead of the
+# main buffer. Bordered floats all use box-drawing corner/edge characters,
+# so their presence anywhere on screen is a reliable proxy.
+full_pane=$(tmux capture-pane -t "$nvim_pane" -p 2>/dev/null)
+case "$full_pane" in
+  *"╭"*|*"╮"*|*"╰"*|*"╯"*|*"┌"*|*"┐"*|*"└"*|*"┘"*) exit 0 ;;
+esac
+
 # Find which line to land on: for Edit, locate the first line of new_string
 # in the file as it stands now. Everything else just opens at line 1.
 line=1

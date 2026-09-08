@@ -31,6 +31,19 @@
             "rewakeSummary": "New note"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/tuicr-comment-check.sh\"",
+            "timeout": 7260,
+            "async": true,
+            "asyncRewake": true,
+            "rewakeMessage": "tuicr comment watcher fired:",
+            "rewakeSummary": "New tuicr comment"
+          }
+        ]
       }
     ]
   }

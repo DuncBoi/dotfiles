@@ -20,6 +20,9 @@ end
 
 -- Small floating input box (rounded border, title showing file:line) instead
 -- of a bottom command-line prompt.
+-- Claude's brand clay/orange, used for the float's border.
+vim.api.nvim_set_hl(0, "ClaudeNoteBorder", { fg = "#D97757" })
+
 local function open_note_float(rel_path, line)
     local buf = vim.api.nvim_create_buf(false, true)
     vim.bo[buf].buftype = "nofile"
@@ -34,10 +37,10 @@ local function open_note_float(rel_path, line)
         height = 1,
         style = "minimal",
         border = "rounded",
-        title = string.format(" Note for Claude (%s:%d) ", rel_path, line),
+        title = " Ask Claude ",
         title_pos = "center",
     })
-    vim.wo[win].winhl = "Normal:NormalFloat"
+    vim.wo[win].winhl = "Normal:NormalFloat,FloatBorder:ClaudeNoteBorder"
 
     local function close()
         if vim.api.nvim_win_is_valid(win) then

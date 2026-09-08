@@ -53,3 +53,5 @@ eval "$(direnv hook zsh)"
 [ -f ~/.secrets ] && source ~/.secrets
 
 eval "$(fnm env --use-on-cd)"
+
+[ -f ~/.shrc.whatnot.android ] && . ~/.shrc.whatnot.android

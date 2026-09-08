@@ -51,11 +51,6 @@ require("lazy").setup({
     },
 
     {
-        "sindrets/diffview.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
-
-    {
         "VonHeikemen/lsp-zero.nvim",
         dependencies = {
             -- LSP Support
