@@ -62,7 +62,14 @@ check_once() {
   reason=$(printf '%s' "$comments" | jq -r --arg ids "$cc_ids" '
     ($ids | split("\n") | map(select(length > 0))) as $ccids
     | [.[] | select(.id as $i | $ccids | index($i))]
-    | map("- \(.path // "review"):\(.start_line // "-") — \(.content)") | join("\n")
+    | map(
+        "- \(.path // "review"):" +
+        (if .start_line == null then "-"
+         elif .end_line != null and .end_line != .start_line then "\(.start_line)-\(.end_line)"
+         else "\(.start_line)" end) +
+        " — \(.content)"
+      )
+    | join("\n")
   ')
 
   # Delete the cc: comments from the session file so they aren't persisted
