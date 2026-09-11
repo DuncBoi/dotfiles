@@ -18,10 +18,16 @@ require("lazy").setup({
         "nvim-lua/plenary.nvim",
     },
 
-    -- Telescope (looking up files / words) 
+    -- Telescope (looking up files / words)
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            -- Native fzf sorter: adds query operators ('exact, !negate, ^/$
+            -- anchors, space = AND) to every picker, and is much faster on
+            -- large candidate sets than the default Lua sorter.
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        },
     },
 
     -- Treesitter (for recognizing languages)
